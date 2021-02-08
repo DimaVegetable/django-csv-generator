@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block username %}
+    <a class="p-2 text-dark " >Hello, {{username}}</a>
+{% endblock %}
+
+{% block content%}
+    <div class="container">
+        <form class="needs-validation" novalidate="" method="post">
+            {% csrf_token %}
+            <div class="h5 my-0 me-md-auto fw-normal">
+                <h5 class="h5 my-0 me-md-auto fw-normal">Delete schema, you sure?</h5>
+            </div>
+
+            <div class="text-right mt-3">
+                <button class="w-30 btn btn-primary btn-lg d-flex justify-content-center" type="submit">Delete</button>
+            </div>
+            <span>{{ error }}</span>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,1 @@
+from DataUsers.celery import app

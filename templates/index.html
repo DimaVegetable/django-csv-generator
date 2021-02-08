@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="d-flex flex-column justify-content-between flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <div class="d-flex flex-column flex-md-row align-items-center">
+            <a class="h5 my-0 me-md-auto fw-normal text-dark" href="/home">User forms</a>
+            <nav class="my-2 my-md-0 me-md-3">
+                <a class="p-2 text-dark" href="/schemas">Schemas</a>
+            </nav>
+        </div>
+        <div class="d-flex flex-column flex-md-row align-items-center">
+            <div class="my-2 my-md-0 me-md-3">
+                  {% if request.user.is_authenticated %}
+                        {%block username%}<div class="p-2 text-dark " >Hello, {{username}}</div>{% endblock %}
+                    {% else %}
+                        <a class="mr-3 btn btn-outline-primary" href="/register">Register</a>
+                    {% endif %}
+            </div>
+            {% if request.user.is_authenticated %}
+                <a class="btn btn-outline-primary" href="/logout">Logout</a>
+            {% else %}
+                <a class="btn btn-outline-primary" href="/login">Login</a>
+            {% endif %}
+        </div>
+    </header>
+    {% block content %}
+    <div class="container">
+        <div class="d-flex flex-column justify-content-between flex-md-row align-items-center p-3 px-md-4 mb-3">
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                    <h5 class="h5 my-0 me-md-auto fw-normal">Data schemas</h5>
+            </div>
+            <div class="d-flex flex-column flex-md-row align-items-center">
+                <a class="btn btn-outline-primary" href="schemas/newSchema">New schema</a>
+            </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Created</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          {%for item in items%}
+            <tr>
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.name_schema}}</td>
+              <td>{{item.date}}</td>
+              <td>
+                  <div>
+                    <a class="p-2 " href="home/{{item.id}}/update">Edit scheme</a>
+                  </div>
+                  <div>
+                    <a class="p-2 " href="home/{{item.id}}/delete">delete</a>
+                  </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
+    {% endblock %}
+</body>
+</html>

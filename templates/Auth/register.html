@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+</head>
+<body class="text-center">
+    <div class="vertical-align">
+        <div class="container d-flex justify-content-center">
+            <form method="post">
+                {% csrf_token %}
+                <h1 class="h3 mb-3 fw-normal">Register</h1>
+                {{ form }}
+                <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+                <div class="col-12 d-flex justify-content-center ">
+                    {% if messages %}
+                    {% for message in messages%}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{message}}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{ message.tags}}" role="alert">
+                                {{message}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
