@@ -86,11 +86,12 @@ def add_new_schema(request):
 
 @login_required
 def export_to_csv(request, pk):
+    schema_id = pk
     response = HttpResponse(content_type='text/csv')
     writer = csv.writer(response)
     writer.writerow(['Name schema', 'First name', 'Last name', 'Phone number', 'Email', 'Address', 'Age', 'Job', 'Company'])
-    for user_form in Schema.objects.all().values_list('name_schema', 'first_name', 'last_name', 'phone_number', 'email', 'address', 'age',
-                                                     'job', 'company'):
+    for user_form in Schema.objects.filter(id=schema_id).values_list('name_schema', 'first_name', 'last_name', 'phone_number', 'email',
+                                                                      'address', 'age', 'job', 'company'):
         writer.writerow(user_form)
     response['Content-Disposition'] = 'attachment; filename="user.csv'
     return response
