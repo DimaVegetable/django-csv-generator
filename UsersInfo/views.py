@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from .task import generator_form
 
 
 class UpdateScheme(LoginRequiredMixin, UpdateView):
@@ -97,3 +98,8 @@ def export_to_csv(request, pk):
         writer.writerow(user_form)
     response['Content-Disposition'] = f'attachment; filename = {filename}.csv'
     return response
+
+
+def generator_schema(request):
+    generator_form.delay()
+    return redirect('/')

@@ -10,7 +10,7 @@
                     <h5 class="h5 my-0 me-md-auto fw-normal">Data sets</h5>
             </div>
             <div class="d-flex flex-column flex-md-row align-items-center">
-                <a class="btn btn-outline-primary" href="#">Generate data</a>
+                <button class="btn btn-outline-primary" onclick="location.href='schemas/generator'" >Generate data</button>
             </div>
         </div>
          <table class="table table-bordered">
@@ -27,7 +27,7 @@
             <tr>
               <th scope="row">{{item.id}}</th>
               <td>{{item.date}}</td>
-              <td>Ready?</td>
+              <td>Ready</td>
               <td>
                   <div>
                       <a class="p-2 " href="home/{{item.id}}/export">Download</a>

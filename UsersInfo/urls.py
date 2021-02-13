@@ -11,5 +11,6 @@ urlpatterns = [
     path('login', views.user_login),
     path('logout', views.user_logout),
     path('register', views.user_register),
-    path('home/<int:pk>/export', views.export_to_csv)
+    path('home/<int:pk>/export', views.export_to_csv),
+    path('schemas/generator', views.generator_schema),
 ]
